@@ -1,0 +1,129 @@
+
+@import './variables.styl';
+
+.card-container {
+    background: white;
+    border-radius: 10px;
+    margin: 30px 10px;
+    padding: 50px 30px 0;
+    box-shadow: 0px 0px 20px hsla($dark-grayish-cyan, 0.5);
+    cursor: pointer;
+    position: relative;
+
+    li {
+        list-style: none;
+    }
+
+    @media screen and (min-width: 1200px) {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px 30px;
+        max-width: 1400px;
+        align-items: center;
+        margin: 20px auto;
+
+        &-desktop-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+    }
+}
+
+.card-container-active {
+    border-left: 6px solid $desaturated-dark-cyan;
+}
+
+.card-container-details-footer {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-start;
+    padding: 0;
+    color: $dark-grayish-cyan;
+    margin: 14px 0;
+    font-weight: 400;
+}
+
+.card-container-details-title {
+    color: $very-dark-grayish-cyan;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 12px 0;
+
+    &:hover {
+        color: $desaturated-dark-cyan;
+    }
+}
+
+.card-container-details-footer-item + * {
+    list-style-type: disc !important;
+}
+
+.company-title {
+    color: $desaturated-dark-cyan;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-container-details-company {
+    display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-container-img {
+    position: absolute;
+    top: -50px;
+
+    @media screen and (min-width: 1200px) {
+        position: static;
+    }
+}
+
+.new, .featured {
+    color: white;
+    padding: 3px 10px;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.new {
+    background: $desaturated-dark-cyan;
+    border-radius: 20px;
+}
+
+.featured {
+    background: $very-dark-grayish-cyan;
+    border-radius: 20px;
+}
+
+.card-container-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-top: 1px solid $dark-grayish-cyan;
+    padding: 25px 0;
+
+    @media screen and (min-width: 1200px) {
+        border: none;
+    }
+}
+
+.card-container-tag-item {
+    color: $desaturated-dark-cyan;
+    padding: 10px;
+    font-weight: bold;
+    background: $light-grayish-cyan-filter;
+    border-radius: 10px;
+    margin: 0;
+
+    &:hover {
+        background: $desaturated-dark-cyan;
+        color: $light-grayish-cyan-filter;
+    }
+}
