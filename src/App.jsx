@@ -1,37 +1,67 @@
-import { createRoot, createSignal, For, Index } from "solid-js";
+import { createRoot, createSignal, For, Index, onMount } from "solid-js";
 import Card from "./card";
 import data from "./assets/data.json";
 import "./styles/index.css";
 import Filter from "./filter";
+import {
+  filterData as filtering,
+  dataFiltering,
+  dataTags,
+} from "./util/filterData";
 
 function App() {
   const [fData, setfData] = createSignal(data);
   const [filterData, setFilterData] = createSignal([]);
+  const [searchvalue, setSearchValue] = createSignal("");
+  let datatags = dataTags(data);
+  console.log(datatags);
 
   const handleClick = (e) => {
-    let key = Object.keys(e.target.dataset)[0];
-    setFilterData([...filterData(), key]);
-    setfData(
-      data.filter((a) => {
-        return a[key].includes(e.target.dataset[key]);
-      })
-    );
+    setFilterData(filtering(filterData(), e.target.dataset));
+    setfData(dataFiltering(filterData(), data));
   };
 
   return (
     <div className="app">
       <div className="app-container-outer">
         <div className="app-container"></div>
-        <Filter filters={filterData()} />
+        <Filter
+          filters={filterData()}
+          setFilterData={setFilterData}
+          setfData={setfData}
+          searchvalue={searchvalue()}
+          setSearchValue={setSearchValue}
+        />
       </div>
       <div className="app-container-list">
-        <div className="filter-container-search-items">
-          <div className="filter-container-search-item">Javascript</div>
-          <div className="filter-container-search-item">Javascript</div>
-          <div className="filter-container-search-item">Javascript</div>
-          <div className="filter-container-search-item">Javascript</div>
-          <div className="filter-container-search-item">Javascript</div>
-        </div>
+        <Show
+          when={
+            searchvalue().length &&
+            datatags.some((a) =>
+              a.toLowerCase().includes(searchvalue().toLowerCase())
+            )
+          }
+        >
+          <div className="filter-container-search-items">
+            <For
+              each={datatags.filter((a) =>
+                a.toLowerCase().includes(searchvalue().toLowerCase())
+              )}
+            >
+              {(d, i) => (
+                <div
+                  className="filter-container-search-item"
+                  onClick={(e) => {
+                    setFilterData(filtering(filterData(), {}));
+                    setfData(dataFiltering(filterData(), data));
+                  }}
+                >
+                  {d}
+                </div>
+              )}
+            </For>
+          </div>
+        </Show>
 
         <For each={fData()}>
           {(d, i) => {
