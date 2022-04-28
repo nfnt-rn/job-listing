@@ -7,6 +7,8 @@ import {
   filterData as filtering,
   dataFiltering,
   dataTags,
+  keyLookup,
+  tagsFilter,
 } from "./util/filterData";
 
 function App() {
@@ -14,7 +16,8 @@ function App() {
   const [filterData, setFilterData] = createSignal([]);
   const [searchvalue, setSearchValue] = createSignal("");
   let datatags = dataTags(data);
-  console.log(datatags);
+  let datatagsValues = Object.values(datatags).flat();
+  let datatagsKeys = Object.keys(dataTags);
 
   const handleClick = (e) => {
     setFilterData(filtering(filterData(), e.target.dataset));
@@ -37,23 +40,20 @@ function App() {
         <Show
           when={
             searchvalue().length &&
-            datatags.some((a) =>
-              a.toLowerCase().includes(searchvalue().toLowerCase())
-            )
+            tagsFilter(datatagsValues, filterData(), searchvalue()).length
           }
         >
           <div className="filter-container-search-items">
-            <For
-              each={datatags.filter((a) =>
-                a.toLowerCase().includes(searchvalue().toLowerCase())
-              )}
-            >
+            <For each={tagsFilter(datatagsValues, filterData(), searchvalue())}>
               {(d, i) => (
                 <div
                   className="filter-container-search-item"
                   onClick={(e) => {
-                    setFilterData(filtering(filterData(), {}));
+                    setFilterData(
+                      filtering(filterData(), { [keyLookup(d, datatags)]: d })
+                    );
                     setfData(dataFiltering(filterData(), data));
+                    setSearchValue("");
                   }}
                 >
                   {d}
