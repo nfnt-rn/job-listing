@@ -72,7 +72,6 @@ function App() {
                   active={d.featured ? true : false}
                   onClick={handleClick}
                 />
-                ;
               </div>
             );
           }}

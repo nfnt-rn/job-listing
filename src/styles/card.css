@@ -34,6 +34,7 @@
   justify-content: flex-start;
   padding: 0;
   color: #7b8e8e;
+  font-size: 17px;
   margin: 14px 0;
   font-weight: 400;
 }
@@ -105,8 +106,9 @@
   padding: 10px;
   font-weight: bold;
   background: #eef6f6;
-  border-radius: 10px;
+  border-radius: 4px;
   margin: 0;
+  font-size: 14px;
 }
 .card-container-tag-item:hover {
   background: #5ba4a4;
