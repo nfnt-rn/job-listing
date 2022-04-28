@@ -1,14 +1,28 @@
 .filter-container {
-  padding: 0 50px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  max-width: 550px;
+  margin: 0 auto;
 }
 .filter-container [contenteditable='true']:focus {
   border: none !important;
   outline: none !important;
+}
+@media screen and (min-width: 450px) {
+  .filter-container {
+    padding: 0 50px;
+    max-width: 100%;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .filter-container {
+    padding: 0;
+    max-width: 1440px;
+  }
 }
 .filter-container-inner {
   background: #fff;

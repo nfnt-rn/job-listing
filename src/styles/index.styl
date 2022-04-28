@@ -10,6 +10,10 @@
 body {
     background: $light-grayish-cyan;
     min-height: 100vh;
+
+    @media screen and (max-width: 340px) {
+        display: none;
+    }
 }
 
 [contenteditable='true']:focus {
@@ -60,8 +64,13 @@ body {
 }
 
 .card-desktop-container {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    @media screen and (min-width: 450px) {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 }
 
 .filter-container-search-items {
